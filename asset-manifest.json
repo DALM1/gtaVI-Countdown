@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/gtaVI-Countdown/static/css/main.9d756722.css",
-    "main.js": "/gtaVI-Countdown/static/js/main.e4535f3c.js",
+    "main.css": "/gtaVI-Countdown/static/css/main.3ebece51.css",
+    "main.js": "/gtaVI-Countdown/static/js/main.a75bbad0.js",
     "static/media/videoplayback.mp4": "/gtaVI-Countdown/static/media/videoplayback.f2d2c09d8dfe27de8029.mp4",
     "static/media/videoplayback (1).mp4": "/gtaVI-Countdown/static/media/videoplayback (1).e80387af19851812e163.mp4",
     "static/media/Chimbala x Omega - Se Me Nota - (Agarrame) - (Video Oficial).mp3": "/gtaVI-Countdown/static/media/Chimbala x Omega - Se Me Nota - (Agarrame) - (Video Oficial).0c56d541de1b8c8db833.mp3",
     "static/media/Jason_and_Lucia_Robbery_landscape.09c8a~do21h4p.avif": "/gtaVI-Countdown/static/media/Jason_and_Lucia_Robbery_landscape.09c8a~do21h4p.fe27fa423b07c1cfae60.avif",
     "static/media/Grand_Theft_Auto_VI_logo_(with_gradient).svg.webp": "/gtaVI-Countdown/static/media/Grand_Theft_Auto_VI_logo_(with_gradient).svg.a0286090cfa8672a246b.webp",
     "index.html": "/gtaVI-Countdown/index.html",
-    "main.9d756722.css.map": "/gtaVI-Countdown/static/css/main.9d756722.css.map",
-    "main.e4535f3c.js.map": "/gtaVI-Countdown/static/js/main.e4535f3c.js.map"
+    "main.3ebece51.css.map": "/gtaVI-Countdown/static/css/main.3ebece51.css.map",
+    "main.a75bbad0.js.map": "/gtaVI-Countdown/static/js/main.a75bbad0.js.map"
   },
   "entrypoints": [
-    "static/css/main.9d756722.css",
-    "static/js/main.e4535f3c.js"
+    "static/css/main.3ebece51.css",
+    "static/js/main.a75bbad0.js"
   ]
 }
