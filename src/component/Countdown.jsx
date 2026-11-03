@@ -1,43 +1,71 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 const CountdownTimer = ({ futureDate }) => {
-  const calculateTimeLeft = () => {
-    const difference = +new Date(futureDate) - +new Date();
-    let timeLeft = {};
+  const calculateTimeLeft = useCallback(() => {
+    const difference = +new Date(futureDate) - Date.now();
 
-    if (difference > 0) {
-      timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      };
+    if (difference <= 0) {
+      return null;
     }
 
-    return timeLeft;
-  };
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / 1000 / 60) % 60),
+      seconds: Math.floor((difference / 1000) % 60),
+      centiseconds: Math.floor((difference % 1000) / 10),
+    };
+    }, [futureDate]);
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = window.setInterval(() => {
       setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    }, 10);
 
-    return () => clearTimeout(timer);
-  });
+    return () => clearInterval(timer);
+    }, [calculateTimeLeft]);
 
-  const { days, hours, minutes, seconds } = timeLeft;
+  const formatUnit = (value, minimumDigits = 2) =>
+    String(value).padStart(minimumDigits, "0");
+
+  const units = timeLeft
+    ? [
+        {
+          label: "Jours",
+          value: formatUnit(timeLeft.days, timeLeft.days >= 100 ? 3 : 2),
+        },
+        { label: "Heures", value: formatUnit(timeLeft.hours) },
+        { label: "Minutes", value: formatUnit(timeLeft.minutes) },
+        { label: "Secondes", value: formatUnit(timeLeft.seconds) },
+        { label: "Centièmes", value: formatUnit(timeLeft.centiseconds) },
+      ]
+    : [];
 
   return (
     <div className="countdown">
-      {Object.keys(timeLeft).length === 0 ? (
-        <p>Compte à rebours terminé!</p>
+      {!timeLeft ? (
+        <p className="countdown-finished">Compte a rebours termine !</p>
       ) : (
-        <p className="countdown">
-          Temps restant: {days} jours, {hours} heures, {minutes} minutes,{" "}
-          {seconds} secondes
-        </p>
+        <div className="countdown-panel">
+          <p className="countdown-kicker">Temps restant</p>
+          <div className="countdown-display" aria-label="Compte a rebours">
+            {units.map((unit, index) => (
+              <React.Fragment key={unit.label}>
+                <div className="countdown-segment">
+                  <span className="countdown-value">{unit.value}</span>
+                  <span className="countdown-label">{unit.label}</span>
+                </div>
+                {index < units.length - 1 ? (
+                  <span className="countdown-separator" aria-hidden="true">
+                    :
+                  </span>
+                ) : null}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );
